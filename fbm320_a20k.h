@@ -43,7 +43,7 @@
  * Range of setting:
  * {osr_1024, osr_2048, osr_4096, osr_8192, osr_16384}
  */
- #define OVERSAMPLING_RATE_DEFAULT  osr_16384
+ #define OVERSAMPLING_RATE_DEFAULT  osr_8192
 
 /* Control registers address*/
 #define FBM320_TAKE_MEAS_REG	0xf4
@@ -94,6 +94,9 @@
 #define FBM320_SPI_3BYTE 0x40
 #define FBM320_SPI_4BYTE 0x60
 #endif
+
+extern volatile uint32_t TMR0_Ticks;
+extern volatile uint32_t fbm320_update_rdy;
 
 struct fbm320_calibration_data {
 	int32_t C0, C1, C2, C3, C4, C5, C6, C7, \
