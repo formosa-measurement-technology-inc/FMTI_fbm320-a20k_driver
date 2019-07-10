@@ -655,7 +655,7 @@ void fbm320_update_data(void)
  * @brief      { API for calculating real temperature and pressure values.
  *               The results are stored in fbm320_data structure.
  *               "barom->real_temperature" is represented real temperature value.
- *               "barom->real_temperature" is in uint of drgree Celsius.
+ *               "barom->real_temperature" is in uint of 0.01 drgree Celsius.
  *               "barom->real_pressure" is represented real pressure value.
  *               "barom->real_pressure" is in unit of Pa. }
  *
@@ -691,11 +691,8 @@ int fbm320_calculation(struct fbm320_data *barom)
 		X23 = (X22 >= X21) ? (X22 - X21) : (X21 - X22);
 		X24 = (X23 >> 11) * (cali->C7 + 166426);
 		X25 = ((X23 & 0x7FF) * (cali->C7 + 166426)) >> 11;
-		if ((X22 - X21) < 0)
-			X26 = ((0 - X24 - X25) >> 11) + cali->C7 + 166426;
-		else
-			X26 = ((X24 + X25) >> 11) + cali->C7 + 166426;
-
+		X26 = (X21 >= X22 ? ((0 - X24 - X25) >> 11) : ((X24 + X25) >> 11)) + cali->C7 + 166426;
+		
 		PP1 = ((UP - 8388608) - X13) >> 2;
 		PP2 = (X26 >> 11) * PP1;
 		PP3 = ((X26 & 0x7FF) * PP1) >> 11;
