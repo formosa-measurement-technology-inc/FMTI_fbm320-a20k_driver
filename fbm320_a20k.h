@@ -31,6 +31,7 @@
 #define DEVICE_NAME     "FBM320-A20K"
 #define FBM320_CHIP_ID  0x42
 //#define DEBUG_FBM320  //Enable debug mode
+#define MSG_LOG
 
 /**
  * { I2C 7bit address setting for fbm320 }
@@ -43,7 +44,7 @@
  * Range of setting:
  * {osr_1024, osr_2048, osr_4096, osr_8192, osr_16384}
  */
- #define OVERSAMPLING_RATE_DEFAULT  osr_8192
+#define OVERSAMPLING_RATE_DEFAULT  osr_8192
 
 /* Control registers address*/
 #define FBM320_TAKE_MEAS_REG	0xf4
@@ -100,7 +101,7 @@ extern volatile uint32_t fbm320_update_rdy;
 
 struct fbm320_calibration_data {
 	int32_t C0, C1, C2, C3, C4, C5, C6, C7, \
-	C8, C9, C10, C11, C12, C13;	
+	C8, C9, C10, C11, C12, C13;
 };
 
 enum fbm320_osr {
